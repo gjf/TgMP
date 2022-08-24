@@ -8,13 +8,13 @@ REM Copyrights: © Fixxxer
 REM Trademarks: 
 REM Originalname: TgMP.exe
 REM Comments: 
-REM Productversion:  4. 3. 0. 0
-REM Fileversion:  4. 3. 0. 0
+REM Productversion:  4. 3. 2. 0
+REM Fileversion:  4. 3. 2. 0
 REM Internalname: TgMP.exe
 REM ExeType: console
 REM Architecture: x86
 REM Appicon: X:\VoIP\Telegram\TgMultiProfile\Icon.2.0409.ico
-REM AdministratorManifest: Yes
+REM AdministratorManifest: No
 REM Embeddedfile: X:\VoIP\Telegram\TgMultiProfile\SetConsole.exe
 REM  QBFC Project Options End
 @ECHO ON
@@ -128,6 +128,7 @@ if /i "%ask%"=="yes" goto new
 if /i "%ask%"=="y" goto new
 if /i "%ask%"=="n" goto end
 if /i "%ask%"=="no" goto end
+if /i "%ask%"=="0" goto removealltraces
 if /i "%ask%" NEQ "n" if /i "%ask%" NEQ "no" if /i "%ask%" NEQ "y" if /i "%ask%" NEQ "yes" goto quitting
 
 :noprof
@@ -295,6 +296,16 @@ exit /B 0
 echo You cannot use this name as it is used by Telegram!
 exit /B 1
 
+:removealltraces
+reg delete "HKEY_CLASSES_ROOT\tg" /f >nul 2>nul
+reg delete "HKEY_CLASSES_ROOT\tdesktop.tg" /f >nul 2>nul
+reg delete "HKEY_CLASSES_ROOT\ktgdesktop.tg" /f >nul 2>nul
+reg delete "HKEY_CURRENT_USER\Software\RegisteredApplications\Kotatogram Desktop" /f >nul 2>nul
+reg delete "HKEY_CURRENT_USER\Software\RegisteredApplications\Telegram Desktop" /f >nul 2>nul
+reg delete "HKEY_CURRENT_USER\Software\KotatogramDesktop" /f >nul 2>nul
+reg delete "HKEY_CURRENT_USER\Software\TelegramDesktop" /f >nul 2>nul
+goto end
+
 :notelegram
 echo Please place this program in the folder
 echo where Telegram.exe, 64Gram.exe or Kotatogram.exe exists.
@@ -330,3 +341,4 @@ rem echo.
 rem pause
 :doublestart
 color
+exit /B 0
