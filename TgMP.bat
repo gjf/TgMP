@@ -8,14 +8,14 @@ REM Copyrights: © Fixxxer
 REM Trademarks: 
 REM Originalname: TgMP.exe
 REM Comments: 
-REM Productversion:  4. 3. 2. 0
-REM Fileversion:  4. 3. 2. 0
+REM Productversion:  4. 4. 0. 0
+REM Fileversion:  4. 4. 0. 0
 REM Internalname: TgMP.exe
 REM ExeType: console
 REM Architecture: x86
 REM Appicon: X:\VoIP\Telegram\TgMultiProfile\Icon.2.0409.ico
 REM AdministratorManifest: No
-REM Embeddedfile: X:\VoIP\Telegram\TgMultiProfile\SetConsole.exe
+REM Embeddedfile: X:\VoIP\Telegram\TgMultiProfile\nircmdc.exe|nircmdc.exe
 REM  QBFC Project Options End
 @ECHO ON
 @ECHO OFF
@@ -89,7 +89,8 @@ rem echo ---------------------------
 rem echo ^<^<^< !DO NOT CLOSE THIS! ^>^>^>
 rem echo ---------------------------
 rem echo.
-%MYFILES%\setconsole /hide
+rem %MYFILES%\setconsole /hide
+%MYFILES%\nircmdc.exe win hide ititle "Multiprofile starter for Telegram/Kotatogram/64Gram"
 start /wait 64Gram.exe -workdir %name%\64gram\
 goto looping
 
@@ -99,7 +100,8 @@ rem echo ---------------------------
 rem echo ^<^<^< !DO NOT CLOSE THIS! ^>^>^>
 rem echo ---------------------------
 rem echo.
-%MYFILES%\setconsole /hide
+rem %MYFILES%\setconsole /hide
+%MYFILES%\nircmdc.exe win hide ititle "Multiprofile starter for Telegram/Kotatogram/64Gram"
 start /wait Kotatogram.exe -workdir %name%\kotatogram\
 goto looping
 
@@ -109,12 +111,14 @@ rem echo ---------------------------
 rem echo ^<^<^< !DO NOT CLOSE THIS! ^>^>^>
 rem echo ---------------------------
 rem echo.
-%MYFILES%\setconsole /hide
+rem %MYFILES%\setconsole /hide
+%MYFILES%\nircmdc.exe win hide ititle "Multiprofile starter for Telegram/Kotatogram/64Gram"
 start /wait Telegram.exe -workdir %name%\telegram\
 goto looping
 
 :looping
-%MYFILES%\setconsole /show /fg
+rem %MYFILES%\setconsole /show /fg
+%MYFILES%\nircmdc.exe win show ititle "Multiprofile starter for Telegram/Kotatogram/64Gram"
 echo ---------------------------
 echo ^<^<^<        Done!        ^>^>^>
 echo ---------------------------
