@@ -8,8 +8,8 @@ REM Copyrights: © Fixxxer
 REM Trademarks: 
 REM Originalname: TgMP.exe
 REM Comments: 
-REM Productversion:  5. 0. 0. 0
-REM Fileversion:  5. 0. 0. 0
+REM Productversion:  5. 0. 0. 1
+REM Fileversion:  5. 0. 0. 1
 REM Internalname: TgMP.exe
 REM ExeType: console
 REM Architecture: x86
@@ -229,7 +229,7 @@ rem echo ---------------------------
 rem echo.
 rem %MYFILES%\setconsole /hide
 %MYFILES%\nircmdc.exe win hide ititle "Multiprofile starter for 64Gram/Kotatogram/Telegram/iMe"
-start /wait iMe.exe -workdir %name%\telegram\
+start /wait iMe.exe -workdir %name%\iMe\
 exit /b
 
 :wrongchoose
