@@ -8,8 +8,8 @@ REM Copyrights: © Fixxxer
 REM Trademarks: 
 REM Originalname: TgMP.exe
 REM Comments: 
-REM Productversion:  5. 1. 0. 0
-REM Fileversion:  5. 1. 0. 0
+REM Productversion:  5. 1. 0. 1
+REM Fileversion:  5. 1. 0. 1
 REM Internalname: TgMP.exe
 REM ExeType: console
 REM Architecture: x86
@@ -138,7 +138,7 @@ echo.
 set "name="
 set "newname="
 SET /P ask="Any more? [y/n]>"
-if /i "%ask%" NEQ "n" if /i "%ask%" NEQ "no" if /i "%ask%" NEQ "y" if /i "%ask%" NEQ "yes" goto quitting
+if /i "%ask%" NEQ "n" if /i "%ask%" NEQ "no" if /i "%ask%" NEQ "y" if /i "%ask%" NEQ "yes" if /i "%ask%" NEQ "0" goto quitting
 if /i "%ask%"=="yes" goto new
 if /i "%ask%"=="y" goto new
 if /i "%ask%"=="n" goto end
