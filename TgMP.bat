@@ -8,8 +8,8 @@ REM Copyrights: © Fixxxer
 REM Trademarks: 
 REM Originalname: TgMP.exe
 REM Comments: 
-REM Productversion:  5. 0. 0. 1
-REM Fileversion:  5. 0. 0. 1
+REM Productversion:  5. 1. 0. 0
+REM Fileversion:  5. 1. 0. 0
 REM Internalname: TgMP.exe
 REM ExeType: console
 REM Architecture: x86
@@ -36,11 +36,7 @@ copy /y NUL %0.lock >nul 2>nul
 
 if not exist "64Gram.exe" if not exist "Kotatogram.exe" if not exist "Telegram.exe" if not exist "iMe.exe" goto :0000
 
-del /F /Q 1.reg >nul 2>nul
-del /F /Q 2.reg >nul 2>nul
-del /F /Q 3.reg >nul 2>nul
-del /F /Q 4.reg >nul 2>nul
-del /F /Q 5.reg >nul 2>nul
+for /l %%i in (1,1,6) do del /f /q %%i.reg >nul 2>nul
 reg export "HKEY_CLASSES_ROOT\tg" 1.reg /y >nul 2>nul
 reg export "HKEY_CLASSES_ROOT\tdesktop.tg" 2.reg /y >nul 2>nul
 reg export "HKEY_CLASSES_ROOT\ktgdesktop.tg" 3.reg /y >nul 2>nul
@@ -67,32 +63,69 @@ SET /P name="Type a name for a new profile >"
 CALL :LoCase name
 call :checkprofilename name
 if %ERRORLEVEL%==1 goto newprof
-mkdir "%name%\telegram"
-mkdir "%name%\kotatogram"
-mkdir "%name%\64gram"
-mkdir "%name%\iMe"
+for /d %%i in (64gram,kotatogram,telegram,iMe) do mkdir "%%i"
 
 :starttg
-if exist "Telegram.exe" attrib +R Telegram.exe
-if exist "Kotatogram.exe" attrib +R Kotatogram.exe
-if exist "64Gram.exe" attrib +R 64Gram.exe
-if exist "iMe.exe" attrib +R iMe.exe
+for /d %%i in (64gram,kotatogram,telegram,iMe) do if exist "%%i" attrib +R %%i
 if exist Updater.exe del /F /Q Updater.exe
-if not exist "64Gram.exe" if not exist "Kotatogram.exe" if not exist "Telegram.exe" if exist "iMe.exe" call :clientrun 000i
-if not exist "64Gram.exe" if not exist "Kotatogram.exe" if exist "Telegram.exe" if not exist "iMe.exe" call :clientrun 00t0
-if not exist "64Gram.exe" if not exist "Kotatogram.exe" if exist "Telegram.exe" if exist "iMe.exe" call :clientrun 00ti
-if not exist "64Gram.exe" if exist "Kotatogram.exe" if not exist "Telegram.exe" if not exist "iMe.exe" call :clientrun 0k00
-if not exist "64Gram.exe" if exist "Kotatogram.exe" if not exist "Telegram.exe" if exist "iMe.exe" call :clientrun 0k0i
-if not exist "64Gram.exe" if exist "Kotatogram.exe" if exist "Telegram.exe" i if not exist "iMe.exe" call :clientrun 0kt0
-if not exist "64Gram.exe" if exist "Kotatogram.exe" if exist "Telegram.exe" if exist "iMe.exe" call :clientrun 0kti
-if exist "64Gram.exe" if not exist "Kotatogram.exe" if not exist "Telegram.exe" if not exist "iMe.exe" call :clientrun 6000
-if exist "64Gram.exe" if not exist "Kotatogram.exe" if not exist "Telegram.exe" if exist "iMe.exe" call :clientrun 600i
-if exist "64Gram.exe" if not exist "Kotatogram.exe" if exist "Telegram.exe" if not exist "iMe.exe" call :clientrun 60t0
-if exist "64Gram.exe" if not exist "Kotatogram.exe" if exist "Telegram.exe" if exist "iMe.exe" call :clientrun 60ti
-if exist "64Gram.exe" if exist "Kotatogram.exe" if not exist "Telegram.exe" if not exist "iMe.exe" call :clientrun 6k00
-if exist "64Gram.exe" if exist "Kotatogram.exe" if not exist "Telegram.exe" if exist "iMe.exe" call :clientrun 6k0i
-if exist "64Gram.exe" if exist "Kotatogram.exe" if exist "Telegram.exe" if not exist "iMe.exe" call :clientrun 6kt0
-if exist "64Gram.exe" if exist "Kotatogram.exe" if exist "Telegram.exe" if exist "iMe.exe" call :clientrun 6kti
+:clientrun 
+echo The following Telegram clients are found:
+echo.
+if exist "64Gram.exe" echo 1.	64Gram
+if exist "Kotatogram.exe" echo 3.	Kotatogram
+if exist "Telegram.exe" echo 5.	Telegram
+if exist "iMe.exe" echo 7.	iMe
+echo.
+SET /P ask="Which one you want to start? Enter the number that corrsponds to client>"
+if "%ask%" NEQ "1" if "%ask%" NEQ "3" if "%ask%" NEQ "5" if "%ask%" NEQ "7" goto clientrun
+if "%ask%"=="1" goto 6000
+if "%ask%"=="3" goto 0k00
+if "%ask%"=="5" goto 00t0
+if "%ask%"=="7" goto 000i
+:6000
+if not exist "64Gram.exe" goto clientrun
+echo.
+rem echo ---------------------------
+rem echo ^<^<^< !DO NOT CLOSE THIS! ^>^>^>
+rem echo ---------------------------
+rem echo.
+rem %MYFILES%\setconsole /hide
+%MYFILES%\nircmdc.exe win hide ititle "Multiprofile starter for 64Gram/Kotatogram/Telegram/iMe"
+start /wait 64Gram.exe -workdir %name%\64gram\
+goto looping
+:0k00
+if not exist "Kotatogram.exe" goto clientrun
+echo.
+rem echo ---------------------------
+rem echo ^<^<^< !DO NOT CLOSE THIS! ^>^>^>
+rem echo ---------------------------
+rem echo.
+rem %MYFILES%\setconsole /hide
+%MYFILES%\nircmdc.exe win hide ititle "Multiprofile starter for 64Gram/Kotatogram/Telegram/iMe"
+start /wait Kotatogram.exe -workdir %name%\kotatogram\
+goto looping
+:00t0
+if not exist "Telegram.exe" goto clientrun
+echo.
+rem echo ---------------------------
+rem echo ^<^<^< !DO NOT CLOSE THIS! ^>^>^>
+rem echo ---------------------------
+rem echo.
+rem %MYFILES%\setconsole /hide
+%MYFILES%\nircmdc.exe win hide ititle "Multiprofile starter for 64Gram/Kotatogram/Telegram/iMe"
+start /wait Telegram.exe -workdir %name%\telegram\
+goto looping
+:000i
+if not exist "iMe.exe" goto clientrun
+echo.
+rem echo ---------------------------
+rem echo ^<^<^< !DO NOT CLOSE THIS! ^>^>^>
+rem echo ---------------------------
+rem echo.
+rem %MYFILES%\setconsole /hide
+%MYFILES%\nircmdc.exe win hide ititle "Multiprofile starter for 64Gram/Kotatogram/Telegram/iMe"
+start /wait iMe.exe -workdir %name%\iMe\
+goto looping
 
 :looping
 rem %MYFILES%\setconsole /show /fg
@@ -101,7 +134,6 @@ echo ---------------------------
 echo ^<^<^<        Done!        ^>^>^>
 echo ---------------------------
 echo.
-
 :quitting
 set "name="
 set "newname="
@@ -126,10 +158,7 @@ echo Such profile already exists!
 echo The data will be overwritten!
 SET /P ask="If you want to proceed press 0, choose once again - any key>"
 if /i "%ask%" NEQ "0" goto newproftdata
-mkdir "%name%\telegram"
-mkdir "%name%\kotatogram"
-mkdir "%name%\64gram"
-mkdir "%name%\iMe"
+for /d %%i in (64gram,kotatogram,telegram,iMe) do mkdir "%%i"
 echo.
 :askingtdata
 echo Which client corresponds to this profile?
@@ -166,75 +195,6 @@ echo Try again or create a new profile by pressing "Enter" after the prompt.
 echo.
 set "name="
 goto confirm
-
-:clientrun 
-set smbl=%~1
-:askingclient
-echo The following Telegram clients are found:
-echo.
-if "%smbl:~0,1%"=="6" echo 1.	64Gram
-if "%smbl:~1,1%"=="k" echo 3.	Kotatogram
-if "%smbl:~2,1%"=="t" echo 5.	Telegram
-if "%smbl:~3,1%"=="i" echo 7.	iMe
-echo.
-SET /P ask="Which one you want to start? Enter the number that corrsponds to client>"
-if "%ask%" NEQ "1" if "%ask%" NEQ "3" if "%ask%" NEQ "5" if "%ask%" NEQ "7" goto askingclient
-if "%ask%"=="1" goto 6000
-if "%ask%"=="3" goto 0k00
-if "%ask%"=="5" goto 00t0
-if "%ask%"=="7" goto 000i
-
-:6000
-if not exist "64Gram.exe" goto wrongchoose
-echo.
-rem echo ---------------------------
-rem echo ^<^<^< !DO NOT CLOSE THIS! ^>^>^>
-rem echo ---------------------------
-rem echo.
-rem %MYFILES%\setconsole /hide
-%MYFILES%\nircmdc.exe win hide ititle "Multiprofile starter for 64Gram/Kotatogram/Telegram/iMe"
-start /wait 64Gram.exe -workdir %name%\64gram\
-exit /b
-
-:0k00
-if not exist "Kotatogram.exe" goto wrongchoose
-echo.
-rem echo ---------------------------
-rem echo ^<^<^< !DO NOT CLOSE THIS! ^>^>^>
-rem echo ---------------------------
-rem echo.
-rem %MYFILES%\setconsole /hide
-%MYFILES%\nircmdc.exe win hide ititle "Multiprofile starter for 64Gram/Kotatogram/Telegram/iMe"
-start /wait Kotatogram.exe -workdir %name%\kotatogram\
-exit /b
-
-:00t0
-if not exist "Telegram.exe" goto wrongchoose
-echo.
-rem echo ---------------------------
-rem echo ^<^<^< !DO NOT CLOSE THIS! ^>^>^>
-rem echo ---------------------------
-rem echo.
-rem %MYFILES%\setconsole /hide
-%MYFILES%\nircmdc.exe win hide ititle "Multiprofile starter for 64Gram/Kotatogram/Telegram/iMe"
-start /wait Telegram.exe -workdir %name%\telegram\
-exit /b
-
-:000i
-if not exist "iMe.exe" goto wrongchoose
-echo.
-rem echo ---------------------------
-rem echo ^<^<^< !DO NOT CLOSE THIS! ^>^>^>
-rem echo ---------------------------
-rem echo.
-rem %MYFILES%\setconsole /hide
-%MYFILES%\nircmdc.exe win hide ititle "Multiprofile starter for 64Gram/Kotatogram/Telegram/iMe"
-start /wait iMe.exe -workdir %name%\iMe\
-exit /b
-
-:wrongchoose
-echo Please be more attentive: there is no such client in your folder!
-goto askingclient
 
 :LoCase
 if not defined %~1 exit /B 1
@@ -337,19 +297,9 @@ reg delete "HKEY_CURRENT_USER\Software\RegisteredApplications\64Gram Desktop" /f
 reg delete "HKEY_CURRENT_USER\Software\KotatogramDesktop" /f >nul 2>nul
 reg delete "HKEY_CURRENT_USER\Software\TelegramDesktop" /f >nul 2>nul
 reg delete "HKEY_CURRENT_USER\Software\iMe" /f >nul 2>nul
-reg import 1.reg >nul 2>nul
-reg import 2.reg >nul 2>nul
-reg import 3.reg >nul 2>nul
-reg import 4.reg >nul 2>nul
-reg import 5.reg >nul 2>nul
-reg import 6.reg >nul 2>nul
+for /l %%i in (1,1,6) do reg import %%i.reg >nul 2>nul
 
-del /F /Q 1.reg >nul 2>nul
-del /F /Q 2.reg >nul 2>nul
-del /F /Q 3.reg >nul 2>nul
-del /F /Q 4.reg >nul 2>nul
-del /F /Q 5.reg >nul 2>nul
-del /F /Q 6.reg >nul 2>nul
+for /l %%i in (1,1,6) do del /f /q %%i.reg >nul 2>nul
 del /F /Q %0.lock >nul 2>nul
 cls
 rem echo Bye!
