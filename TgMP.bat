@@ -8,8 +8,8 @@ REM Copyrights: © Fixxxer
 REM Trademarks: 
 REM Originalname: TgMP.exe
 REM Comments: 
-REM Productversion:  5. 2. 0. 1
-REM Fileversion:  5. 2. 0. 1
+REM Productversion:  5. 2. 0. 2
+REM Fileversion:  5. 2. 0. 2
 REM Internalname: TgMP.exe
 REM ExeType: console
 REM Architecture: x86
@@ -36,16 +36,17 @@ copy /y NUL %0.lock >nul 2>nul
 
 if not exist "64Gram.exe" if not exist "Kotatogram.exe" if not exist "Telegram.exe" if not exist "iMe.exe" if not exist "AyuGram.exe" goto :0000
 
-for /l %%i in (1,1,9) do del /f /q %%i.reg >nul 2>nul
+for /l %%i in (1,1,10) do del /f /q %%i.reg >nul 2>nul
 reg export "HKEY_CLASSES_ROOT\tg" 1.reg /y >nul 2>nul
 reg export "HKEY_CLASSES_ROOT\tdesktop.tg" 2.reg /y >nul 2>nul
 reg export "HKEY_CLASSES_ROOT\ktgdesktop.tg" 3.reg /y >nul 2>nul
-reg export "HKEY_CURRENT_USER\Software\KotatogramDesktop" 4.reg /y >nul 2>nul
-reg export "HKEY_CURRENT_USER\Software\TelegramDesktop" 5.reg /y  >nul 2>nul
-reg export "HKEY_CURRENT_USER\Software\iMe" 6.reg /y  >nul 2>nul
-reg export "HKEY_CURRENT_USER\Software\64Gram" 7.reg /y  >nul 2>nul
-reg export "HKEY_CURRENT_USER\Software\64GramDesktop" 8.reg /y  >nul 2>nul
-reg export "HKEY_CURRENT_USER\Software\AyuGramDesktop" 9.reg /y  >nul 2>nul
+reg export "HKEY_CLASSES_ROOT\AyuGram.tg" 4.reg /y >nul 2>nul
+reg export "HKEY_CURRENT_USER\Software\KotatogramDesktop" 5.reg /y >nul 2>nul
+reg export "HKEY_CURRENT_USER\Software\TelegramDesktop" 6.reg /y  >nul 2>nul
+reg export "HKEY_CURRENT_USER\Software\iMe" 7.reg /y  >nul 2>nul
+reg export "HKEY_CURRENT_USER\Software\64Gram" 8.reg /y  >nul 2>nul
+reg export "HKEY_CURRENT_USER\Software\64GramDesktop" 9.reg /y  >nul 2>nul
+reg export "HKEY_CURRENT_USER\Software\AyuGramDesktop" 10.reg /y  >nul 2>nul
 
 if exist "tdata" goto tdata
 
@@ -285,6 +286,7 @@ exit /B 1
 reg delete "HKEY_CLASSES_ROOT\tg" /f >nul 2>nul
 reg delete "HKEY_CLASSES_ROOT\tdesktop.tg" /f >nul 2>nul
 reg delete "HKEY_CLASSES_ROOT\ktgdesktop.tg" /f >nul 2>nul
+reg delete "HKEY_CLASSES_ROOT\AyuGram.tg" /f >nul 2>nul
 reg delete "HKEY_CURRENT_USER\Software\RegisteredApplications\Kotatogram Desktop" /f >nul 2>nul
 reg delete "HKEY_CURRENT_USER\Software\RegisteredApplications\Telegram Desktop" /f >nul 2>nul
 reg delete "HKEY_CURRENT_USER\Software\RegisteredApplications\iMe Desktop" /f >nul 2>nul
@@ -312,6 +314,7 @@ endlocal
 reg delete "HKEY_CLASSES_ROOT\tg" /f >nul 2>nul
 reg delete "HKEY_CLASSES_ROOT\tdesktop.tg" /f >nul 2>nul
 reg delete "HKEY_CLASSES_ROOT\ktgdesktop.tg" /f >nul 2>nul
+reg delete "HKEY_CLASSES_ROOT\AyuGram.tg" /f >nul 2>nul
 reg delete "HKEY_CURRENT_USER\Software\RegisteredApplications\Kotatogram Desktop" /f >nul 2>nul
 reg delete "HKEY_CURRENT_USER\Software\RegisteredApplications\Telegram Desktop" /f >nul 2>nul
 reg delete "HKEY_CURRENT_USER\Software\RegisteredApplications\iMe Desktop" /f >nul 2>nul
@@ -324,9 +327,9 @@ reg delete "HKEY_CURRENT_USER\Software\64Gram" /f >nul 2>nul
 reg delete "HKEY_CURRENT_USER\Software\iMe" /f >nul 2>nul
 reg delete "HKEY_CURRENT_USER\Software\AyuGramDesktop" /f >nul 2>nul
 reg delete "HKEY_CURRENT_USER\Software\AyuGram" /f >nul 2>nul
-for /l %%i in (1,1,9) do reg import %%i.reg >nul 2>nul
+for /l %%i in (1,1,10) do reg import %%i.reg >nul 2>nul
 :finalend
-for /l %%i in (1,1,9) do del /f /q %%i.reg >nul 2>nul
+for /l %%i in (1,1,10) do del /f /q %%i.reg >nul 2>nul
 del /F /Q %0.lock >nul 2>nul
 cls
 rem echo Bye!
