@@ -8,19 +8,19 @@ REM Copyrights: © Fixxxer
 REM Trademarks: 
 REM Originalname: TgMP.exe
 REM Comments: 
-REM Productversion:  5. 2. 0. 0
-REM Fileversion:  5. 2. 0. 0
+REM Productversion:  5. 2. 0. 1
+REM Fileversion:  5. 2. 0. 1
 REM Internalname: TgMP.exe
 REM ExeType: console
 REM Architecture: x86
 REM Appicon: X:\VoIP\Telegram\TgMultiProfile\Icon.2.0409.ico
 REM AdministratorManifest: No
-REM Embeddedfile: X:\VoIP\Telegram\TgMultiProfile\nircmdc.exe|nircmdc.exe
+REM Embeddedfile: E:\Repositories\TgMP\MYFILES\nircmdc.exe|nircmdc.exe
 REM  QBFC Project Options End
 @ECHO ON
 @ECHO OFF
 setlocal enabledelayedexpansion
-title Multiprofile starter for 64Gram/Kotatogram/Telegram/iMe/iMe/AyuGram
+title Multiprofile starter for 64Gram/Kotatogram/Telegram/iMe/AyuGram
 color 1f
 
 if not exist %0.lock goto start
